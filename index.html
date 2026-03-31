@@ -62,7 +62,14 @@
             font-family: var(--font-body);
             font-weight: 400;
             color: var(--text-body);
-            background: var(--bg);
+            background:
+                radial-gradient(ellipse 80% 50% at 20% 8%, rgba(64,53,184,0.1) 0%, transparent 50%),
+                radial-gradient(ellipse 60% 40% at 85% 25%, rgba(100,70,220,0.08) 0%, transparent 50%),
+                radial-gradient(ellipse 70% 50% at 10% 55%, rgba(39,32,113,0.07) 0%, transparent 50%),
+                radial-gradient(ellipse 50% 40% at 75% 70%, rgba(64,53,184,0.09) 0%, transparent 50%),
+                radial-gradient(ellipse 60% 30% at 40% 90%, rgba(100,70,220,0.06) 0%, transparent 50%),
+                var(--bg);
+            background-attachment: fixed;
             line-height: 1.65;
             overflow-x: hidden;
             position: relative;
@@ -142,6 +149,14 @@
             padding: 6rem 0;
             position: relative;
             overflow: hidden;
+        }
+
+        /* Purple gradient divider between sections */
+        .section-divider {
+            height: 1px;
+            max-width: 600px;
+            margin: 0 auto;
+            background: linear-gradient(90deg, transparent, rgba(64,53,184,0.2), rgba(64,53,184,0.35), rgba(64,53,184,0.2), transparent);
         }
 
         /* ═══════════════════════════════════════
@@ -282,26 +297,26 @@
             z-index: 0;
         }
         .bg-orb-1 {
-            width: 600px; height: 600px;
-            background: radial-gradient(circle, rgba(64,53,184,0.25) 0%, rgba(39,32,113,0.1) 50%, transparent 75%);
+            width: 650px; height: 650px;
+            background: radial-gradient(circle, rgba(64,53,184,0.38) 0%, rgba(39,32,113,0.15) 45%, transparent 70%);
             top: -150px; left: -100px;
             animation: float-orb 22s ease-in-out infinite;
         }
         .bg-orb-2 {
-            width: 500px; height: 500px;
-            background: radial-gradient(circle, rgba(100,70,220,0.2) 0%, rgba(64,53,184,0.08) 50%, transparent 75%);
+            width: 550px; height: 550px;
+            background: radial-gradient(circle, rgba(100,70,220,0.32) 0%, rgba(64,53,184,0.12) 45%, transparent 70%);
             top: 40px; right: -120px;
             animation: float-orb 28s ease-in-out infinite reverse;
         }
         .bg-orb-3 {
-            width: 550px; height: 550px;
-            background: radial-gradient(circle, rgba(64,53,184,0.18) 0%, rgba(120,80,240,0.06) 50%, transparent 75%);
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(64,53,184,0.3) 0%, rgba(120,80,240,0.1) 45%, transparent 70%);
             top: 50%; left: -180px;
             animation: float-orb 25s ease-in-out infinite 5s;
         }
         .bg-orb-4 {
-            width: 450px; height: 450px;
-            background: radial-gradient(circle, rgba(39,32,113,0.16) 0%, rgba(80,60,200,0.05) 50%, transparent 75%);
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(39,32,113,0.28) 0%, rgba(80,60,200,0.08) 45%, transparent 70%);
             bottom: 5%; right: -100px;
             animation: float-orb 20s ease-in-out infinite 3s;
         }
@@ -1025,10 +1040,12 @@
     </section>
 
 
+    <div class="section-divider"></div>
+
     <!-- ═══════════════ SERVICES ═══════════════ -->
     <section id="services">
-        <div class="bg-orb" style="width:400px;height:400px;background:radial-gradient(circle,rgba(64,53,184,0.14) 0%,transparent 70%);top:20%;right:-80px;animation:float-orb 26s ease-in-out infinite 2s;"></div>
-        <div class="bg-orb" style="width:350px;height:350px;background:radial-gradient(circle,rgba(100,70,220,0.1) 0%,transparent 70%);bottom:10%;left:-100px;animation:float-orb 22s ease-in-out infinite 4s reverse;"></div>
+        <div class="bg-orb" style="width:450px;height:450px;background:radial-gradient(circle,rgba(64,53,184,0.28) 0%,rgba(64,53,184,0.08) 45%,transparent 70%);top:15%;right:-60px;animation:float-orb 26s ease-in-out infinite 2s;"></div>
+        <div class="bg-orb" style="width:400px;height:400px;background:radial-gradient(circle,rgba(100,70,220,0.22) 0%,rgba(100,70,220,0.06) 45%,transparent 70%);bottom:5%;left:-80px;animation:float-orb 22s ease-in-out infinite 4s reverse;"></div>
         <div class="container">
             <div class="reveal" style="text-align:center; max-width:600px; margin:0 auto 1rem;">
                 <span class="section-label">Services</span>
@@ -1061,7 +1078,7 @@
 
     <!-- ═══════════════ EXPERIENCE ═══════════════ -->
     <section id="experience">
-        <div class="bg-orb" style="width:380px;height:380px;background:radial-gradient(circle,rgba(39,32,113,0.12) 0%,transparent 70%);top:30%;left:-120px;animation:float-orb 24s ease-in-out infinite 1s;"></div>
+        <div class="bg-orb" style="width:450px;height:450px;background:radial-gradient(circle,rgba(39,32,113,0.25) 0%,rgba(39,32,113,0.08) 45%,transparent 70%);top:25%;left:-100px;animation:float-orb 24s ease-in-out infinite 1s;"></div>
         <div class="container">
             <span class="section-label reveal">Experience</span>
             <h2 class="reveal">Where I've built and led</h2>
@@ -1102,6 +1119,8 @@
         </div>
     </section>
 
+
+    <div class="section-divider"></div>
 
     <!-- ═══════════════ CASE STUDIES ═══════════════ -->
     <section id="work">
@@ -1187,9 +1206,11 @@
     </section>
 
 
+    <div class="section-divider"></div>
+
     <!-- ═══════════════ TECH STACK ═══════════════ -->
     <section class="tech-section">
-        <div class="bg-orb" style="width:420px;height:420px;background:radial-gradient(circle,rgba(64,53,184,0.12) 0%,transparent 70%);top:20%;right:-100px;animation:float-orb 20s ease-in-out infinite 3s;"></div>
+        <div class="bg-orb" style="width:480px;height:480px;background:radial-gradient(circle,rgba(64,53,184,0.26) 0%,rgba(64,53,184,0.08) 45%,transparent 70%);top:15%;right:-80px;animation:float-orb 20s ease-in-out infinite 3s;"></div>
         <div class="container">
             <span class="section-label reveal">Tech Stack</span>
             <h2 class="reveal">Tools I build with daily</h2>
