@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aukik Aurnab | AI Consultant & CTO</title>
+    <meta name="description" content="I help tech companies ship with AI agents and automate processes at scale. CTO & Co-Founder of AI Buddy Catalyst Labs, Ottawa, Canada.">
+    <meta name="theme-color" content="#f9f8fe">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Noise SVG filter -->
+    <svg style="position:absolute;width:0;height:0;pointer-events:none">
+        <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.72" numOctaves="4" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+    </svg>
+
+    <style>
+        /* ═══════════════════════════════════════
+           RESET & BASE
+        ═══════════════════════════════════════ */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+        :root {
+            --grad-start: #4035b8;
+            --grad-end: #272071;
+            --gradient: linear-gradient(90deg, var(--grad-start), var(--grad-end));
+            --gradient-135: linear-gradient(135deg, var(--grad-start), var(--grad-end));
+
+            --bg: #f9f8fe;
+            --bg-white: #ffffff;
+
+            --text-dark: #110e24;
+            --text-body: #3b3560;
+            --text-muted: #7d76a0;
+            --text-on-gradient: #ffffff;
+
+            --glass-bg: rgba(255, 255, 255, 0.32);
+            --glass-bg-solid: rgba(255, 255, 255, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.45);
+            --glass-shadow: 0 8px 32px rgba(39, 32, 113, 0.08);
+            --glass-blur: 18px;
+
+            --purple-soft: #ede8ff;
+            --purple-glow: rgba(64, 53, 184, 0.12);
+
+            --radius-xl: 28px;
+            --radius-lg: 20px;
+            --radius-md: 14px;
+            --radius-sm: 10px;
+            --radius-pill: 100px;
+
+            --font-display: 'Bricolage Grotesque', serif;
+            --font-body: 'Outfit', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-body);
+            font-weight: 400;
+            color: var(--text-body);
+            background: var(--bg);
+            line-height: 1.65;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Grain overlay */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            filter: url(#grain);
+            opacity: 0.028;
+            pointer-events: none;
+            z-index: 10000;
+        }
+
+        /* ═══════════════════════════════════════
+           TYPOGRAPHY
+        ═══════════════════════════════════════ */
+        h1, h2, h3, h4 {
+            font-family: var(--font-display);
+            color: var(--text-dark);
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+        }
+        h1 { font-size: clamp(2.4rem, 5.5vw, 3.8rem); font-weight: 700; text-wrap: balance; }
+        h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 700; margin-bottom: 1rem; text-wrap: balance; }
+        h3 { font-size: clamp(1.15rem, 2vw, 1.4rem); font-weight: 600; }
+        p { max-width: 64ch; }
+        a { color: var(--grad-start); text-decoration: none; transition: opacity 0.25s; }
+        a:hover { opacity: 0.8; }
+        a:focus-visible, button:focus-visible, .btn:focus-visible {
+            outline: 2px solid var(--grad-start);
+            outline-offset: 3px;
+            border-radius: 4px;
+        }
+
+        /* Skip link */
+        .skip-link {
+            position: absolute;
+            top: -100%;
+            left: 1rem;
+            z-index: 10001;
+            background: var(--gradient);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: var(--radius-pill);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        .skip-link:focus { top: 1rem; }
+
+        .section-label {
+            font-family: var(--font-body);
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.6rem;
+            display: inline-block;
+        }
+
+        /* ═══════════════════════════════════════
+           LAYOUT
+        ═══════════════════════════════════════ */
+        .container {
+            width: 100%;
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        section {
+            padding: 6rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* ═══════════════════════════════════════
+           BUTTONS
+        ═══════════════════════════════════════ */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--font-body);
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1), background 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            white-space: nowrap;
+        }
+        .btn-primary {
+            background: var(--gradient);
+            color: var(--text-on-gradient);
+            padding: 0.9rem 2rem;
+            border-radius: var(--radius-pill);
+            font-size: 0.95rem;
+            box-shadow: 0 4px 20px rgba(64, 53, 184, 0.3), 0 0 0 0 rgba(64, 53, 184, 0);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(64, 53, 184, 0.4), 0 0 0 4px rgba(64, 53, 184, 0.08);
+            opacity: 1;
+        }
+        .btn-sm { padding: 0.6rem 1.4rem; font-size: 0.85rem; }
+        .btn-ghost {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            color: var(--text-dark);
+            padding: 0.7rem 1.5rem;
+            border-radius: var(--radius-pill);
+            font-size: 0.88rem;
+        }
+        .btn-ghost:hover { background: rgba(255,255,255,0.55); opacity: 1; }
+
+        /* ═══════════════════════════════════════
+           GLASS COMPONENTS
+        ═══════════════════════════════════════ */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+        }
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s;
+        }
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: calc(var(--radius-xl) + 1px);
+            padding: 1.5px;
+            background: linear-gradient(135deg, rgba(64,53,184,0.35), transparent 40%, transparent 60%, rgba(39,32,113,0.25));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.45s;
+            pointer-events: none;
+        }
+        .glass-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 48px rgba(39, 32, 113, 0.12);
+        }
+        .glass-card:hover::before { opacity: 1; }
+
+        .glass-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: rgba(255,255,255,0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.5);
+            border-radius: var(--radius-pill);
+            padding: 0.45rem 1.1rem;
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--grad-start);
+        }
+
+        /* ═══════════════════════════════════════
+           BACKGROUND ORBS
+        ═══════════════════════════════════════ */
+        .bg-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+            will-change: transform;
+            z-index: 0;
+        }
+        .bg-orb-1 {
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(64,53,184,0.18) 0%, rgba(39,32,113,0.06) 60%, transparent 80%);
+            top: -120px; left: -80px;
+            animation: float-orb 22s ease-in-out infinite;
+        }
+        .bg-orb-2 {
+            width: 380px; height: 380px;
+            background: radial-gradient(circle, rgba(64,53,184,0.12) 0%, rgba(100,80,220,0.05) 60%, transparent 80%);
+            top: 60px; right: -100px;
+            animation: float-orb 28s ease-in-out infinite reverse;
+        }
+        .bg-orb-3 {
+            width: 420px; height: 420px;
+            background: radial-gradient(circle, rgba(64,53,184,0.1) 0%, transparent 70%);
+            top: 50%; left: -150px;
+            animation: float-orb 25s ease-in-out infinite 5s;
+        }
+        .bg-orb-4 {
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, rgba(39,32,113,0.1) 0%, transparent 70%);
+            bottom: 10%; right: -80px;
+            animation: float-orb 20s ease-in-out infinite 3s;
+        }
+
+        @keyframes float-orb {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -25px) scale(1.05); }
+            66% { transform: translate(-20px, 15px) scale(0.96); }
+        }
+
+        /* ═══════════════════════════════════════
+           NAVIGATION
+        ═══════════════════════════════════════ */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: background 0.4s, backdrop-filter 0.4s, border-bottom 0.4s, padding 0.4s;
+        }
+        .nav.scrolled {
+            background: rgba(249, 248, 254, 0.72);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.5);
+            padding: 0.7rem 0;
+        }
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        .nav-logo {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--text-dark);
+        }
+        .nav-logo:hover { opacity: 1; }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        .nav-links a {
+            font-size: 0.88rem;
+            font-weight: 500;
+            color: var(--text-body);
+            transition: color 0.25s;
+        }
+        .nav-links a:hover { color: var(--grad-start); opacity: 1; }
+        .nav-cta { display: flex; align-items: center; }
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+        .nav-toggle span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: var(--text-dark);
+            margin: 5px 0;
+            transition: transform 0.3s, opacity 0.3s;
+            border-radius: 2px;
+        }
+
+        /* ═══════════════════════════════════════
+           HERO
+        ═══════════════════════════════════════ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 8rem 1.5rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero .container { position: relative; z-index: 2; }
+        .hero-badge { margin-bottom: 1.5rem; }
+        .hero h1 {
+            max-width: 780px;
+            margin: 0 auto 1.2rem;
+        }
+        .hero-subtitle {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            margin-bottom: 2.2rem;
+        }
+        .hero-cta-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 3.5rem;
+        }
+
+        /* Stats bar */
+        .stats-bar {
+            display: flex;
+            gap: 1.2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
+        }
+        .stat-card {
+            background: var(--glass-bg-solid);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            padding: 1.4rem 2rem;
+            text-align: center;
+            min-width: 180px;
+            box-shadow: var(--glass-shadow);
+        }
+        .stat-number {
+            display: block;
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+        .stat-label {
+            display: block;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            margin-top: 0.2rem;
+        }
+
+        /* ═══════════════════════════════════════
+           ABOUT
+        ═══════════════════════════════════════ */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3.5rem;
+            align-items: start;
+        }
+        .about-text p { margin-bottom: 1.2rem; color: var(--text-body); }
+        .about-text p:first-of-type { font-size: 1.1rem; color: var(--text-dark); font-weight: 400; }
+        .about-highlights {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .highlight-card {
+            background: var(--glass-bg-solid);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            padding: 1.4rem 1.6rem;
+            box-shadow: var(--glass-shadow);
+            transition: transform 0.3s;
+        }
+        .highlight-card:hover { transform: translateX(4px); }
+        .highlight-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: var(--purple-soft);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.7rem;
+        }
+        .highlight-icon .icon-mask {
+            width: 22px;
+            height: 22px;
+            background-color: var(--grad-start);
+            -webkit-mask-size: contain;
+            mask-size: contain;
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+            -webkit-mask-position: center;
+            mask-position: center;
+        }
+        .highlight-card h3 { font-size: 1rem; margin-bottom: 0.3rem; }
+        .highlight-card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; }
+
+        /* ═══════════════════════════════════════
+           SERVICES
+        ═══════════════════════════════════════ */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2.5rem;
+        }
+        .service-card { padding: 2.2rem 1.8rem; }
+        .service-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 16px;
+            background: var(--gradient-135);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.2rem;
+            box-shadow: 0 4px 16px rgba(64,53,184,0.2);
+        }
+        .service-icon .icon-mask {
+            width: 26px;
+            height: 26px;
+            background-color: white;
+            -webkit-mask-size: contain;
+            mask-size: contain;
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+            -webkit-mask-position: center;
+            mask-position: center;
+        }
+        .service-card h3 { margin-bottom: 0.6rem; }
+        .service-card p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.2rem; line-height: 1.6; }
+        .service-price {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--grad-start);
+        }
+
+        /* ═══════════════════════════════════════
+           EXPERIENCE
+        ═══════════════════════════════════════ */
+        .exp-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        .exp-item {
+            display: grid;
+            grid-template-columns: 140px 1fr;
+            gap: 2rem;
+            padding: 1.5rem 1.8rem;
+            border-radius: var(--radius-lg);
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            transition: background 0.3s;
+        }
+        .exp-item:hover { background: rgba(255,255,255,0.45); }
+        .exp-date {
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            padding-top: 0.15rem;
+        }
+        .exp-role {
+            font-family: var(--font-display);
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 1.05rem;
+        }
+        .exp-company { font-size: 0.9rem; color: var(--grad-start); font-weight: 500; }
+        .exp-desc { font-size: 0.88rem; color: var(--text-muted); margin-top: 0.4rem; }
+
+        /* ═══════════════════════════════════════
+           CASE STUDIES
+        ═══════════════════════════════════════ */
+        .cases-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2.5rem;
+        }
+        .case-card { padding: 2rem; }
+        .case-tag {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--grad-start);
+            background: var(--purple-soft);
+            padding: 0.3rem 0.8rem;
+            border-radius: var(--radius-pill);
+            margin-bottom: 0.8rem;
+        }
+        .case-card h3 { font-size: 1.15rem; margin-bottom: 0.5rem; }
+        .case-card p { font-size: 0.88rem; color: var(--text-muted); }
+        .case-card.featured {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        /* ═══════════════════════════════════════
+           INSIGHTS
+        ═══════════════════════════════════════ */
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2.5rem;
+        }
+        .insight-card { padding: 2rem; }
+        .insight-meta {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            margin-bottom: 0.6rem;
+        }
+        .insight-card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; line-height: 1.35; }
+        .insight-card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
+        .insight-tags {
+            display: flex;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        .insight-tags span {
+            font-size: 0.72rem;
+            font-weight: 500;
+            padding: 0.25rem 0.65rem;
+            border-radius: var(--radius-pill);
+            background: var(--purple-soft);
+            color: var(--grad-start);
+        }
+
+        /* ═══════════════════════════════════════
+           TECH STACK
+        ═══════════════════════════════════════ */
+        .tech-section { text-align: center; }
+        .tech-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            justify-content: center;
+            margin-top: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .tech-pill {
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 0.55rem 1.2rem;
+            border-radius: var(--radius-pill);
+            background: var(--glass-bg-solid);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            color: var(--text-dark);
+            transition: background 0.3s, color 0.3s, border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+            cursor: default;
+        }
+        .tech-pill:hover {
+            background: var(--gradient);
+            color: white;
+            border-color: transparent;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(64,53,184,0.25);
+        }
+
+        /* ═══════════════════════════════════════
+           TESTIMONIALS
+        ═══════════════════════════════════════ */
+        .testimonial-section { text-align: center; }
+        .testimonial-card {
+            max-width: 680px;
+            margin: 2rem auto 0;
+            padding: 2.5rem;
+            text-align: center;
+        }
+        .testimonial-stars {
+            color: #f5a623;
+            font-size: 1.3rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+        .testimonial-quote {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: var(--text-dark);
+            line-height: 1.55;
+            font-style: italic;
+            margin-bottom: 1.2rem;
+            max-width: none;
+        }
+        .testimonial-author {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        .testimonial-source {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+        .proof-row {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        .proof-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-body);
+        }
+        .proof-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 10px;
+            background: var(--purple-soft);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .proof-icon .icon-mask {
+            width: 16px;
+            height: 16px;
+            background-color: var(--grad-start);
+            -webkit-mask-size: contain;
+            mask-size: contain;
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+            -webkit-mask-position: center;
+            mask-position: center;
+        }
+
+        /* ═══════════════════════════════════════
+           CONTACT / CTA
+        ═══════════════════════════════════════ */
+        .cta-section {
+            background: var(--gradient);
+            border-radius: var(--radius-xl);
+            margin: 0 1.5rem 4rem;
+            max-width: 1180px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 4.5rem 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 20% 80%, rgba(255,255,255,0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(255,255,255,0.06) 0%, transparent 40%);
+            pointer-events: none;
+        }
+        .cta-section h2 {
+            color: white;
+            position: relative;
+            z-index: 1;
+        }
+        .cta-section p {
+            color: rgba(255,255,255,0.8);
+            max-width: 520px;
+            margin: 0.8rem auto 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        .btn-white {
+            background: white;
+            color: var(--grad-start);
+            padding: 0.9rem 2rem;
+            border-radius: var(--radius-pill);
+            font-size: 0.95rem;
+            font-weight: 600;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 1;
+        }
+        .btn-white:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            opacity: 1;
+        }
+        .cta-links {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        .cta-links a {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.7);
+            font-weight: 500;
+            transition: color 0.25s;
+        }
+        .cta-links a:hover { color: white; opacity: 1; }
+
+        /* ═══════════════════════════════════════
+           FOOTER
+        ═══════════════════════════════════════ */
+        footer {
+            text-align: center;
+            padding: 2rem 1.5rem 3rem;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+        footer .signoff {
+            font-family: var(--font-display);
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--text-body);
+            margin-bottom: 0.5rem;
+        }
+
+        /* ═══════════════════════════════════════
+           SCROLL ANIMATIONS
+        ═══════════════════════════════════════ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        /* ═══════════════════════════════════════
+           RESPONSIVE
+        ═══════════════════════════════════════ */
+        @media (max-width: 1024px) {
+            .services-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
+            .cases-grid { grid-template-columns: 1fr; }
+            .case-card.featured { grid-template-columns: 1fr; }
+            .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            .reveal { opacity: 1; transform: none; }
+        }
+
+        @media (max-width: 768px) {
+            section { padding: 4rem 0; }
+            .nav-links { display: none; }
+            .nav-cta { display: none; }
+            .nav-toggle { display: block; }
+            .nav-links.open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(249, 248, 254, 0.95);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                padding: 1.5rem;
+                gap: 1rem;
+                border-bottom: 1px solid var(--glass-border);
+            }
+            .nav-inner { padding: 0 1rem; }
+            .hero { padding: 7rem calc(1.5rem + env(safe-area-inset-left, 0px)) 3rem calc(1.5rem + env(safe-area-inset-right, 0px)); min-height: auto; }
+            .stats-bar { flex-direction: column; align-items: center; }
+            .stat-card { min-width: auto; width: 100%; max-width: 300px; }
+            .insights-grid { grid-template-columns: 1fr; }
+            .exp-item { grid-template-columns: 1fr; gap: 0.3rem; }
+            .cta-section { margin: 0 1rem 3rem; padding: 3rem 1.5rem; }
+            .proof-row { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+    <a href="#about" class="skip-link">Skip to content</a>
+
+    <!-- ═══════════════ NAVIGATION ═══════════════ -->
+    <nav class="nav" id="nav">
+        <div class="nav-inner">
+            <a class="nav-logo" href="#">Aukik Aurnab</a>
+            <div class="nav-links" id="navLinks">
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#work">Work</a>
+                <a href="#insights">Insights</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="nav-cta">
+                <a href="https://cal.com/aukik" class="btn btn-primary btn-sm" target="_blank">Book a Call</a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+
+    <main>
+    <!-- ═══════════════ HERO ═══════════════ -->
+    <section class="hero" id="hero">
+        <div class="bg-orb bg-orb-1"></div>
+        <div class="bg-orb bg-orb-2"></div>
+
+        <div class="container">
+            <div class="glass-pill hero-badge reveal">AI Consultant & CTO</div>
+            <h1 class="reveal reveal-delay-1">I help tech companies ship with AI agents and automate processes at scale</h1>
+            <p class="hero-subtitle reveal reveal-delay-2">CTO & Co-Founder, AI Buddy Catalyst Labs &bull; Ottawa, Canada</p>
+            <div class="hero-cta-group reveal reveal-delay-3">
+                <a href="https://cal.com/aukik" class="btn btn-primary" target="_blank">
+                    Book a Free Architecture Call
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+                <a href="https://www.linkedin.com/in/aukik-aurnab/" class="btn btn-ghost" target="_blank">View LinkedIn</a>
+            </div>
+        </div>
+
+        <div class="stats-bar">
+            <div class="stat-card reveal reveal-delay-1">
+                <span class="stat-number">3,755+</span>
+                <span class="stat-label">LinkedIn Followers</span>
+            </div>
+            <div class="stat-card reveal reveal-delay-2">
+                <span class="stat-number">300+</span>
+                <span class="stat-label">Employee Org Transformed</span>
+            </div>
+            <div class="stat-card reveal reveal-delay-3">
+                <span class="stat-number">7</span>
+                <span class="stat-label">Country Distributed Team</span>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ═══════════════ ABOUT ═══════════════ -->
+    <section id="about">
+        <div class="bg-orb bg-orb-3"></div>
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-text reveal">
+                    <span class="section-label">About</span>
+                    <h2>Tech companies know they need to move faster with AI. Most just don't know where to start.</h2>
+                    <p>I work with founders and engineering leaders on two things. First, AI native development consulting. I help engineering teams shift from traditional coding to agent driven development. Not prompt engineering. Full production pipelines where AI agents go from spec to deployment, with verification systems that make the software actually reliable.</p>
+                    <p>Second, enterprise wide AI automation. I go inside organizations, sit with teams across departments, find the highest leverage automation opportunities, and build the systems. I currently do this for an engineering organization with 300+ employees, leading their AI transformation hands on.</p>
+                    <p>I also authored &ldquo;AI Agent 2026,&rdquo; a book on building production systems with AI agents, and write regularly about how the role of the engineer is changing as verification replaces code authorship.</p>
+                </div>
+                <div class="about-highlights">
+                    <div class="highlight-card reveal reveal-delay-1">
+                        <div class="highlight-icon" aria-hidden="true"><span class="icon-mask" style="-webkit-mask-image:url(icons/rocket.png);mask-image:url(icons/rocket.png)"></span></div>
+                        <h3>Agent Driven Development</h3>
+                        <p>Spec driven pipelines where AI agents go from requirements to verified, production ready code.</p>
+                    </div>
+                    <div class="highlight-card reveal reveal-delay-2">
+                        <div class="highlight-icon" aria-hidden="true"><span class="icon-mask" style="-webkit-mask-image:url(icons/team.png);mask-image:url(icons/team.png)"></span></div>
+                        <h3>Enterprise Transformation</h3>
+                        <p>Hands on AI transformation for organizations with 300+ employees. Strategy, implementation, and culture shift.</p>
+                    </div>
+                    <div class="highlight-card reveal reveal-delay-3">
+                        <div class="highlight-icon" aria-hidden="true"><span class="icon-mask" style="-webkit-mask-image:url(icons/globe.png);mask-image:url(icons/globe.png)"></span></div>
+                        <h3>Global Team, Local Roots</h3>
+                        <p>Ottawa based company with a distributed engineering team across 7 countries. Building production software daily.</p>
+                    </div>
+                    <div class="highlight-card reveal reveal-delay-4">
+                        <div class="highlight-icon" aria-hidden="true"><span class="icon-mask" style="-webkit-mask-image:url(icons/lightbulb.png);mask-image:url(icons/lightbulb.png)"></span></div>
+                        <h3>Published Author</h3>
+                        <p>&ldquo;AI Agent 2026&rdquo; covers building production systems with AI agents. Written from real experience, not theory.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ═══════════════ SERVICES ═══════════════ -->
+    <section id="services">
+        <div class="container">
+            <div class="reveal" style="text-align:center; max-width:600px; margin:0 auto 1rem;">
+                <span class="section-label">Services</span>
+                <h2>Three ways I can help</h2>
+                <p style="margin:0 auto;">Whether you need consulting, platform setup, or end to end automation, every engagement starts with understanding your problem.</p>
+            </div>
+            <div class="services-grid">
+                <div class="glass-card service-card reveal reveal-delay-1">
+                    <div class="service-icon" aria-hidden="true"><span class="icon-mask" style="-webkit-mask-image:url(icons/rocket-sparkle.png);mask-image:url(icons/rocket-sparkle.png)"></span></div>
+                    <h3>Agentic Development Consulting</h3>
+                    <p>Teaching engineering teams to ship with AI agents. Maturity assessment, pipeline design, spec driven development, and a 6 layer trust verification system.</p>
+                    <div class="service-price">$200 &ndash; $8,000</div>
+                </div>
+                <div class="glass-card service-card reveal reveal-delay-2">
+                    <div class="service-icon" aria-hidden="true"><span class="icon-mask" style="-webkit-mask-image:url(icons/shield-lock.png);mask-image:url(icons/shield-lock.png)"></span></div>
+                    <h3>Secure AI Agent Platforms</h3>
+                    <p>Claude Code, OpenClaw, NemoClaw setup with production security hardening. Not the default install that ships with 512 known vulnerabilities.</p>
+                    <div class="service-price">$150 &ndash; $1,500</div>
+                </div>
+                <div class="glass-card service-card reveal reveal-delay-3">
+                    <div class="service-icon" aria-hidden="true"><span class="icon-mask" style="-webkit-mask-image:url(icons/lightning.png);mask-image:url(icons/lightning.png)"></span></div>
+                    <h3>Enterprise AI Automation</h3>
+                    <p>Connecting AI agents to your CRMs, Slack, databases, and internal tools. AI that actually touches your real workflows, not just generates text in isolation.</p>
+                    <div class="service-price">$200 &ndash; $5,000</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ═══════════════ EXPERIENCE ═══════════════ -->
+    <section id="experience">
+        <div class="container">
+            <span class="section-label reveal">Experience</span>
+            <h2 class="reveal">Where I've built and led</h2>
+            <div class="exp-timeline">
+                <div class="exp-item reveal">
+                    <div class="exp-date">May 2025 &ndash; Present</div>
+                    <div>
+                        <div class="exp-role">Co-founder & CTO</div>
+                        <div class="exp-company">AI Buddy Catalyst Labs Inc.</div>
+                        <div class="exp-desc">Leading a distributed engineering team building production grade, multi tenant SaaS products with deep domain logic using agentic development pipelines. Architecting advanced RAG systems, AI native workflows, and enterprise integrations on Azure.</div>
+                    </div>
+                </div>
+                <div class="exp-item reveal reveal-delay-1">
+                    <div class="exp-date">Mar 2026 &ndash; Present</div>
+                    <div>
+                        <div class="exp-role">AI Specialist (Consultant)</div>
+                        <div class="exp-company">Riseup Labs</div>
+                        <div class="exp-desc">Consulting a 300+ team software company on AI transformation. Agent driven development strategy, AI product auditing, and building AI first engineering culture across the organization.</div>
+                    </div>
+                </div>
+                <div class="exp-item reveal reveal-delay-2">
+                    <div class="exp-date">Nov 2022 &ndash; Nov 2025</div>
+                    <div>
+                        <div class="exp-role">Chief Technology Officer</div>
+                        <div class="exp-company">Bismo</div>
+                        <div class="exp-desc">Custom AI services for financial sector clients. AI automation, legacy system integration, and building a unified AI powered platform. Led backend architecture, cloud infrastructure, and CI/CD pipelines.</div>
+                    </div>
+                </div>
+                <div class="exp-item reveal reveal-delay-3">
+                    <div class="exp-date">Feb 2024 &ndash; Apr 2025</div>
+                    <div>
+                        <div class="exp-role">Chief Technology Officer</div>
+                        <div class="exp-company">Katerout</div>
+                        <div class="exp-desc">US based catering marketplace. Led technical architecture and engineering team for the platform.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ═══════════════ CASE STUDIES ═══════════════ -->
+    <section id="work">
+        <div class="bg-orb bg-orb-4"></div>
+        <div class="container">
+            <div class="reveal" style="text-align:center; max-width:600px; margin:0 auto 0.5rem;">
+                <span class="section-label">Work</span>
+                <h2>Projects I've shipped</h2>
+            </div>
+            <div class="cases-grid">
+                <div class="glass-card case-card featured reveal">
+                    <div>
+                        <span class="case-tag">AI Transformation</span>
+                        <h3>Enterprise AI Transformation: 300+ Employee Organization</h3>
+                        <p>Agent driven development strategy, AI product auditing, and engineering culture shift for a major software company. Hands on implementation of agentic workflows and company wide AI automation leadership.</p>
+                    </div>
+                    <div style="display:flex; flex-wrap:wrap; gap:0.5rem; align-content:center;">
+                        <span class="tech-pill" style="font-size:0.78rem; padding:0.4rem 0.9rem;">AI Strategy</span>
+                        <span class="tech-pill" style="font-size:0.78rem; padding:0.4rem 0.9rem;">Agent Pipelines</span>
+                        <span class="tech-pill" style="font-size:0.78rem; padding:0.4rem 0.9rem;">Culture Change</span>
+                        <span class="tech-pill" style="font-size:0.78rem; padding:0.4rem 0.9rem;">Product Audit</span>
+                    </div>
+                </div>
+                <div class="glass-card case-card reveal reveal-delay-1">
+                    <span class="case-tag">SaaS Platform</span>
+                    <h3>Multi-Tenant SaaS with Complex RBAC</h3>
+                    <p>Production grade sports management platform for a Belgian client. Multi-party payment routing via Stripe Connect, full CI/CD pipeline, Azure infrastructure with security hardening.</p>
+                </div>
+                <div class="glass-card case-card reveal reveal-delay-2">
+                    <span class="case-tag">AI Product</span>
+                    <h3>Doc Director: Hybrid RAG Document Platform</h3>
+                    <p>AI document platform with voice onboarding, semantic chunking, hybrid retrieval, knowledge graphs, and multi model AI architecture.</p>
+                </div>
+                <div class="glass-card case-card reveal reveal-delay-1">
+                    <span class="case-tag">AI Automation</span>
+                    <h3>AI Productivity Copilot for Marketing Agency</h3>
+                    <p>Custom AI agent system for a digital marketing agency. Automated workflows, intelligent content generation, and business process optimization.</p>
+                </div>
+                <div class="glass-card case-card reveal reveal-delay-2">
+                    <span class="case-tag">Open Source</span>
+                    <h3>InstaRAG: Production RAG Pipeline Library</h3>
+                    <p>Open source library for building production ready RAG pipelines. Semantic chunking, hybrid retrieval with BM25 and vectors, and structured output validation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ═══════════════ INSIGHTS ═══════════════ -->
+    <section id="insights">
+        <div class="container">
+            <div class="reveal" style="text-align:center; max-width:600px; margin:0 auto 0.5rem;">
+                <span class="section-label">Insights</span>
+                <h2>What I write about</h2>
+                <p style="margin:0 auto;">Thoughts on agentic engineering, AI verification, and the future of software development.</p>
+            </div>
+            <div class="insights-grid">
+                <div class="glass-card insight-card reveal reveal-delay-1">
+                    <div class="insight-meta">LinkedIn &bull; 2 days ago</div>
+                    <h3>When the AI Agent Writes &ldquo;return true&rdquo; to Pass Your Tests</h3>
+                    <p>Goodhart's Law playing out in real time. When a measure becomes a target, it ceases to be a good measure. Why property based tests and holdout scenarios matter more than ever.</p>
+                    <div class="insight-tags">
+                        <span>Agentic Coding</span>
+                        <span>Code Quality</span>
+                        <span>Verification</span>
+                    </div>
+                </div>
+                <div class="glass-card insight-card reveal reveal-delay-2">
+                    <div class="insight-meta">LinkedIn &bull; 5 days ago</div>
+                    <h3>The November 2025 Inflection Point That Changed Everything</h3>
+                    <p>Every coding agent before November 2025 had the same fatal flaw. Then something flipped. How inference time optimization inverted the error dynamic entirely.</p>
+                    <div class="insight-tags">
+                        <span>Dark Factory</span>
+                        <span>LLMs</span>
+                        <span>AI Infrastructure</span>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align:center; margin-top:2rem;" class="reveal">
+                <a href="https://www.linkedin.com/in/aukik-aurnab/" class="btn btn-ghost" target="_blank">Read more on LinkedIn</a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ═══════════════ TECH STACK ═══════════════ -->
+    <section class="tech-section">
+        <div class="container">
+            <span class="section-label reveal">Tech Stack</span>
+            <h2 class="reveal">Tools I build with daily</h2>
+            <div class="tech-cloud reveal">
+                <span class="tech-pill">Claude API</span>
+                <span class="tech-pill">Claude Code</span>
+                <span class="tech-pill">MCP</span>
+                <span class="tech-pill">OpenAI API</span>
+                <span class="tech-pill">Python</span>
+                <span class="tech-pill">Node.js</span>
+                <span class="tech-pill">TypeScript</span>
+                <span class="tech-pill">NestJS</span>
+                <span class="tech-pill">PostgreSQL</span>
+                <span class="tech-pill">Neo4j</span>
+                <span class="tech-pill">Qdrant</span>
+                <span class="tech-pill">Redis</span>
+                <span class="tech-pill">Docker</span>
+                <span class="tech-pill">Azure</span>
+                <span class="tech-pill">Next.js</span>
+                <span class="tech-pill">GitHub Actions</span>
+                <span class="tech-pill">Prisma</span>
+                <span class="tech-pill">React</span>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ═══════════════ TESTIMONIALS ═══════════════ -->
+    <section class="testimonial-section">
+        <div class="container">
+            <span class="section-label reveal">Testimonials</span>
+            <h2 class="reveal">What clients say</h2>
+            <div class="glass-card testimonial-card reveal">
+                <div class="testimonial-stars" role="img" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p class="testimonial-quote">&ldquo;Working with Aukik was an absolute delight! He is truly a jackpot when it comes to professionalism and talent.&rdquo;</p>
+                <div class="testimonial-author">Upwork Client</div>
+                <div class="testimonial-source">5.0 Rating &bull; Lead Generation Automation</div>
+            </div>
+            <div class="proof-row reveal">
+                <div class="proof-item">
+                    <div class="proof-icon" aria-hidden="true"><span class="icon-mask" style="-webkit-mask-image:url(icons/lightbulb.png);mask-image:url(icons/lightbulb.png)"></span></div>
+                    <span>Published Author</span>
+                </div>
+                <div class="proof-item">
+                    <div class="proof-icon" aria-hidden="true"><span class="icon-mask" style="-webkit-mask-image:url(icons/cloud-monitor.png);mask-image:url(icons/cloud-monitor.png)"></span></div>
+                    <span>Azure Certified</span>
+                </div>
+                <div class="proof-item">
+                    <div class="proof-icon" aria-hidden="true"><span class="icon-mask" style="-webkit-mask-image:url(icons/cpu.png);mask-image:url(icons/cpu.png)"></span></div>
+                    <span>ML Specialization</span>
+                </div>
+                <div class="proof-item">
+                    <div class="proof-icon" aria-hidden="true"><span class="icon-mask" style="-webkit-mask-image:url(icons/sparkle.png);mask-image:url(icons/sparkle.png)"></span></div>
+                    <span>5.0 Upwork Rating</span>
+                </div>
+                <div class="proof-item">
+                    <div class="proof-icon" aria-hidden="true"><span class="icon-mask" style="-webkit-mask-image:url(icons/verified.png);mask-image:url(icons/verified.png)"></span></div>
+                    <span>3.93/4 CGPA</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ═══════════════ CONTACT / CTA ═══════════════ -->
+    <section id="contact" style="padding-bottom:0;">
+        <div class="cta-section reveal">
+            <h2>Ready to move on AI?</h2>
+            <p>If your engineering org wants to move beyond prompt level AI adoption, let's talk architecture first. No pitch, just problem solving.</p>
+            <a href="https://cal.com/aukik" class="btn btn-white" target="_blank">
+                Book a Free Architecture Call
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <div class="cta-links">
+                <a href="https://www.linkedin.com/in/aukik-aurnab/" target="_blank">LinkedIn</a>
+                <a href="https://www.upwork.com/freelancers/~017d54af385422d944" target="_blank">Upwork</a>
+            </div>
+        </div>
+    </section>
+
+
+    </main>
+
+    <!-- ═══════════════ FOOTER ═══════════════ -->
+    <footer>
+        <div class="signoff">Take care, Aukik</div>
+        <p>&copy; 2026 Aukik Aurnab. AI Buddy Catalyst Labs Inc. Ottawa, Canada.</p>
+    </footer>
+
+
+    <!-- ═══════════════ JAVASCRIPT ═══════════════ -->
+    <script>
+        // Scroll reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Nav scroll effect
+        const nav = document.getElementById('nav');
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 60) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        }, { passive: true });
+
+        // Mobile nav toggle
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+        navToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+        });
+
+        // Close mobile nav on link click
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => navLinks.classList.remove('open'));
+        });
+
+        // Subtle parallax on background orbs
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth - 0.5) * 2;
+            const y = (e.clientY / window.innerHeight - 0.5) * 2;
+            document.querySelectorAll('.bg-orb').forEach((orb, i) => {
+                const factor = (i + 1) * 8;
+                orb.style.transform = `translate(${x * factor}px, ${y * factor}px)`;
+            });
+        });
+    </script>
+</body>
+</html>
